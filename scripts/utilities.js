@@ -1,4 +1,5 @@
-var forEach = function(array, callback) {
+var forEach = function(array, func) {
     for (var i = 0; i < array.length; i++) {
-        array[i].callback();      
+        array[i].func;     
+    }
 };
