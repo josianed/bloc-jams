@@ -11,7 +11,7 @@ var albumPicasso = {
         { name: 'Red', length: '5:01' },
         { name: 'Pink', length: '3:21' },
         { name: 'Magenta', length: '2:15' }
-        ]
+    ]
 };
 
 // Another Example Album
@@ -30,14 +30,14 @@ var albumMarconi = {
     ]
 };
 
-var createSongRow = function(songNumber, songName, songLength) {
+var createSongRow = function (songNumber, songName, songLength) {
     
     var template = 
         '<tr class="album-view-song-item">'
-      + '   <td class="song-item-number">' + songNumber + '</td>'
-      + '   <td class="song-item-title">' + songName + '</td>'
-      + '   <td class="song-item-duration">' + songLength + '</td>'
-      + '</tr>'
+        + '   <td class="song-item-number">' + songNumber + '</td>'
+        + '   <td class="song-item-title">' + songName + '</td>'
+        + '   <td class="song-item-duration">' + songLength + '</td>'
+        + '</tr>'
     ;
     
     return template;
@@ -65,8 +65,16 @@ var setCurrentAlbum = function(album) {
     
 };
 
+var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
+
 window.onload = function() {
     
-    setCurrentAlbum(albumMarconi);
+    setCurrentAlbum(albumPicasso);
+    
+    songListContainer.addEventListener('mouseover', function(event) {
+        
+        console.log(event.target);
+        //stores the DOM element where the event occurred
+    });
     
 };
