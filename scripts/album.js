@@ -30,22 +30,6 @@ var albumMarconi = {
     ]
 };
 
-//Third Album Example (assignment)
-var albumTuring = {
-    name: 'The Turing Test',
-    artist: 'Alan Turing',
-    label: 'GC&CS',
-    year: '1940',
-    albumArtUrl: '/assets/images/album_covers/13.png',
-    songs: [
-        { name: 'Theory of Computation', length: '7:08' },
-        { name: 'Decryption', length: '3:45' },
-        { name: 'Enigma', length: '4:20' },
-        { name: 'Statistically Speaking', length: '1:34' },
-        { name: 'Hey There Delilah', length: '6:04' )
-         ]
-};
-
 var createSongRow = function(songNumber, songName, songLength) {
     
     var template = 
@@ -86,10 +70,3 @@ window.onload = function() {
     setCurrentAlbum(albumMarconi);
     
 };
-
-if (window.getElementsByClassName('album-cover-art').click) {
-    var albumArray = [albumPicasso, albumMarconi, albumTuring];
-    var i = 0;
-    albumArray[i];
-    i++;
-}
