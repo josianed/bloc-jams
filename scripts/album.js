@@ -20,7 +20,7 @@ var albumMarconi = {
     artist: 'Guglielmo Marconi',
     label: 'EM',
     year: '1909',
-    albumArtUrl: 'assets/images/album_covers/20.png',
+    albumArtUrl: '/assets/images/album_covers/20.png',
     songs: [
         { name: 'Hello, Operator?', length: '1:01' },
         { name: 'Ring, ring, ring', length: '5:01' },
@@ -28,6 +28,22 @@ var albumMarconi = {
         { name: 'Can you hear me now?', length: '3:14' },
         { name: 'Wrong phone number', length: '2:15' }
     ]
+};
+
+//Third Album Example (assignment)
+var albumTuring = {
+    name: 'The Turing Test',
+    artist: 'Alan Turing',
+    label: 'GC&CS',
+    year: '1940',
+    albumArtUrl: '/assets/images/album_covers/13.png',
+    songs: [
+        { name: 'Theory of Computation', length: '7:08' },
+        { name: 'Decryption', length: '3:45' },
+        { name: 'Enigma', length: '4:20' },
+        { name: 'Statistically Speaking', length: '1:34' },
+        { name: 'Hey There Delilah', length: '6:04' )
+         ]
 };
 
 var createSongRow = function(songNumber, songName, songLength) {
@@ -40,7 +56,7 @@ var createSongRow = function(songNumber, songName, songLength) {
       + '</tr>'
     ;
     
-    retrn template;
+    return template;
     
 };
 
@@ -59,7 +75,7 @@ var setCurrentAlbum = function(album) {
     
     albumSongList.innerHTML = '';
     
-    for (i = 0; 9 < album.songs.length; i++) {
+    for (i = 0; i < album.songs.length; i++) {
         albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].name, album.songs[i].length);
     }
     
@@ -67,6 +83,13 @@ var setCurrentAlbum = function(album) {
 
 window.onload = function() {
     
-    setCurrentAlbum(albumPicasso);
+    setCurrentAlbum(albumMarconi);
     
 };
+
+if (window.getElementsByClassName('album-cover-art').click) {
+    var albumArray = [albumPicasso, albumMarconi, albumTuring];
+    var i = 0;
+    albumArray[i];
+    i++;
+}
