@@ -6,6 +6,7 @@ var collectionItemTemplate =
 +'    <a class="album-name" href="/album.html"> The Colors </a>'
 +'    <br/>'
 +'    <a href="/album.html"> Pablo Picasso </a>'
++'    <br/>'
 +'     X songs'
 +'    <br/>'
 +'   </p>'
@@ -18,7 +19,7 @@ window.onload = function() {
     
     collectionContainer.innerHTML = '';
     
-    for (var i = 0; i < 12; i++) {
+    for (var i = 0; i < 6; i++) {
         collectionContainer.innerHTML += collectionItemTemplate;
     }
     
