@@ -65,12 +65,52 @@ var setCurrentAlbum = function(album) {
     
 };
 
+//traverses the DOM upward until a parent with a specified class name is found
+var findParentByClassName = function(element, className) {
+    if (className.typeOf != 'string') {
+        alert("Data type error.");
+    } else {
+        var currentParent = element.parentElement;
+        
+        while (currentParent.className != className) {
+            currentParent = currentParent.parentElement;
+        }
+        return currentParent;
+};
+    
+//Returns the element with the .song-item-number class
+var getSongItem = function(element) {
+    
+    switch (element.className) {
+        case 'album-song-button':
+        case 'ion-play':
+        case 'ion-pause':
+            return findParentByClassName(element, 'song-item-number');
+        case 'album-view-song-item':
+            return element.querySelector('.song-item-number');
+        case 'song-item-title':
+        case 'song-item-duration':
+            return findParentByClassName(element, 'album-view-song-item').querySelector('.song-item-number');
+        case 'song-item-number':
+            return element;
+        default:
+            return;
+    }
+    
+};
+
+var clickHandler = function(targetElement) {
+};
+
 //Elements we'll be adding listeners to
 var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
 var songRows = document.getElementsByClassName('album-view-song-item');
 
 //Album button templates
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
+var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
+    
+var currentlyPlayingSong = null;
 
 window.onload = function() {
     
@@ -89,6 +129,10 @@ for (i = 0; i < songRows.length; i++) {
         //Revert the content back to the number
         //Selects first child element, which is the song-item-number element
         this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
+    });
+    
+    songRows[i].addEventListener('click', function(event) {
+        //Event handler call
     });
 } 
     
