@@ -38,6 +38,20 @@
     text-align: right;
 }
 
+.player-bar .player-bar-control-group a {
+    font-size: 1.1rem;
+    vertical-align: middle;
+}
+
+.player-bar .player-bar-control-group .previous {
+    margin-right: 16.5%;
+}
+
+.player-bar .player-bar-control-group .play-pause {
+    margin-right: 15%;
+    font-size: 1.6rem;
+}
+
 .player-bar .currently-playing {
     width: 50%;
     text-align: center;
