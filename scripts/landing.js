@@ -1,7 +1,7 @@
 var animatePoints = function() {
     var revealPoint = function() {
         $(this).css({
-            opacity: 1;
+            opacity: 1,
             transform: 'scaleX(1) translateY(0)'
         });
     };
@@ -17,9 +17,9 @@ $(window).load(function() {
         animatePoints();
     }
     
-    if ($(window).scroll(function(event) {
+    $(window).scroll(function(event) {
     //animate points when scroll below the image, around 500 pixels
-        if($(window).scrollTop() >= 500 {
+        if($(window).scrollTop() >= 500) {
            animatePoints();
         }
     });
