@@ -24,8 +24,7 @@ var createSongRow = function (songNumber, songName, songLength) {
         if (currentlyPlayingSongNumber !== songNumber) {
             //Switch from Play -> Pause button to indicate new song is playing
             $(this).html(pauseButtonTemplate);
-            currentlyPlayingSongNumber = songNumber;
-            currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+            setSong(songNumber);
             updatePlayerBarSong();
             
         } else if (currentlyPlayingSongNumber === songNumber) {
@@ -95,6 +94,11 @@ var trackIndex = function(album, song) {
     return album.songs.indexOf(song);
 };
 
+var setSong = function(songNumber) {
+    currentlyPlayingSongNumber = songNumber;
+    currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+};
+
 
 //Album button templates
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
@@ -137,8 +141,10 @@ var nextSong = function() {
     }
     
     //Set a new current song
-    currentlyPlayingSongNumber = currentSongIndex + 1;
-    currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
+    setSong(songNumber);
+    //old code before assignment, remove once validated
+    //currentlyPlayingSongNumber = currentSongIndex + 1;
+    //currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
     
     // Update the Player Bar information
     $('.currently-playing .song-name').text(currentSongFromAlbum.name);
@@ -169,8 +175,10 @@ var previousSong = function() {
     }
     
     //Set a new current song
-    currentlyPlayingSongNumber = currentSongIndex + 1;
-    currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
+    setSong(songNumber);
+    //old code before assignment, remove once validated
+    //currentlyPlayingSongNumber = currentSongIndex + 1;
+    //currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
     
     // Update the Player Bar information
     $('.currently-playing .song-name').text(currentSongFromAlbum.name);
