@@ -99,6 +99,10 @@ var setSong = function(songNumber) {
     currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
 };
 
+var getSongNumberCell = function(number) {
+  return $(this).find('.song-item-number');  
+};
+
 
 //Album button templates
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
