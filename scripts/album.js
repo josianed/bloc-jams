@@ -95,12 +95,34 @@ var trackIndex = function(album, song) {
 };
 
 var setSong = function(songNumber) {
-    currentlyPlayingSongNumber = songNumber;
-    currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+    
+    if (songNumber !== null) {
+        //Revert to song number for currently playing song because user started playing a new song.
+        var currentlyPlayingCell = $('.song-item-unmber[data-song-number="' + songNumber + '"]');
+        currentlyPlayingCell.html(songNumber);
+    }
+    
+    if (songNumber !== currentlyPlayingSongNumber) {
+        //Switch from Play -> Pause button to indicate new song is playing.
+        $(this).html(pauseButtonTemplate);
+        currentlyPlayingSongNumber = songNumber;
+        currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+        updatePlayerBarSong();
+    }
+    
+    else if (songNumber === currentlyPlayingSongNumber) {
+        //Switch from Pause -> Play button to pause currently playing song.
+        $(this).html(playButtonTemplate);
+        $('.left-controls .play-pause').html(playerBarPlayButton);
+        currentlyPlayingSongNumber = null;
+        currentSongFromAlbum = null;
+    }
+
 };
 
 var getSongNumberCell = function(number) {
-  return $(this).find('.song-item-number');  
+    var songCell = $('.song-item-number[data-song-number="' + number + '"]');
+  return songCell; 
 };
 
 
