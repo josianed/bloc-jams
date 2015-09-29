@@ -30,6 +30,22 @@
      ]
  };
 
+ //Third Album Example (assignment)
+var albumTuring = {
+    name: 'The Turing Test',
+    artist: 'Alan Turing',
+    label: 'GC&CS',
+    year: '1940',
+    albumArtUrl: 'assets/images/album_covers/13.png',
+    songs: [
+        { name: 'Theory of Computation', length: '7:08' },
+        { name: 'Decryption', length: '3:45' },
+        { name: 'Enigma', length: '4:20' },
+        { name: 'Statistically Speaking', length: '1:34' },
+        { name: 'Hey There Delilah', length: '6:04' }
+         ]
+};
+
 
  var createSongRow = function(songNumber, songName, songLength) {
 
@@ -47,31 +63,57 @@
 
  var setCurrentAlbum = function(album) {
  
-     // #1
+     
      var albumTitle = document.getElementsByClassName('album-view-title')[0];
      var albumArtist = document.getElementsByClassName('album-view-artist')[0];
      var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
      var albumImage = document.getElementsByClassName('album-cover-art')[0];
      var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
  
-     // #2
+     
      albumTitle.firstChild.nodeValue = album.name;
      albumArtist.firstChild.nodeValue = album.artist;
      albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
      albumImage.setAttribute('src', album.albumArtUrl);
  
-     // #3
+    
      albumSongList.innerHTML = '';
  
-     // #4
+     
      for (i = 0; i < album.songs.length; i++) {
          albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].name, album.songs[i].length);
      }
  
  };
+
+var a = 0;
+var albums = [albumTuring, albumMarconi, albumPicasso];
+
+
+document.getElementsByClassName('album-cover-art')[0].addEventListener('click', function() {
+    
+    if (a === albums.length) {
+        a = 0;
+        var currentAlbum = albums[a];
+        setCurrentAlbum(currentAlbum);
+    } else {
+        currentAlbum = albums[a++];
+        setCurrentAlbum(currentAlbum);
+    }
+
+});
+
  
  window.onload = function() {
    
      setCurrentAlbum(albumPicasso);
-     
+
  };
+
+
+
+
+
+
+
+
