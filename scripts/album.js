@@ -70,29 +70,28 @@
  var noParent = document.querySelector('html');
 
 
- var findParentByClassName = function(element, className) {
+ var findParentByClassName = function(element, targetClass) {
 
     var currentParent = element.parentElement;
 
-    if (element.parentElement === null) {
-        alert("No parent found.");
-    }
-
-    if (currentParent.className === null) {
-        alert("No parent found with that class name.");
-    } else {
-
-        while (currentParent.className != className) {
+    if (currentParent) {
+         while (currentParent.className && currentParent.className != targetClass) {
             currentParent = currentParent.parentElement;
-
-            return currentParent;
         }
 
+        if (currentParent.className == targetClass) {
+            return currentParent;
+        } else {
+            alert("No parent found with that class name.");
+        }
+
+    } else {
+        alert("No parent found.");
     }
 
  };
 
- findParentByClassName(child, 'banana');
+ findParentByClassName(child, 'song-view');
 
 
 //always returns the element with the song item number class
