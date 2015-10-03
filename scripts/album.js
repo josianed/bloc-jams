@@ -65,12 +65,52 @@
      }
  
  };
+
+
+ var findParentByClassName = function(element, className) {
+
+    var currentParent = element.parentElement;
+
+    while (currentParent.className != className) {
+        currentParent = currentParent.parentElement;
+    }
+
+    return currentParent;
+
+ };
+
+//always returns the element with the song item number class
+ var getSongItem = function(element) {
+    
+    switch (element.className) {
+        case 'album-song-button':
+        case 'ion-play':
+        case 'ion-pause':
+            return findParentByClassName(element, 'song-item-number');
+        case 'album-view-song-item':
+            return element.querySelector('.song-item-number');
+        case 'song-item-title':
+        case 'song-item-duration':
+            return findParentByClassName(element, 'album-view-song-item').querySelector('.song-item-number');
+        case 'song-item-number':
+            return element;
+        default:
+            return;
+    }
+    
+};
+
+
 //Elements with listeners
  var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
  var songRows = document.getElementsByClassName('album-view-song-item');
 
  //Album button templates
  var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
+ var pauseButtonTempalte = '<a class="album-song-button"><span class="ion-pause"></span></a>';
+
+ //Store the state of playing songs
+ var currentlyPlayingSong = null;
  
  window.onload = function() {
    
@@ -79,6 +119,7 @@
      songListContainer.addEventListener('mouseover', function(event) {
 
      //only target individual song rows during event delegation
+     //switch to play button template when mouse moves over song row
          if (event.target.parentElement.className === 'album-view-song-item') {
             event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
          }
@@ -87,6 +128,7 @@
      for (i = 0; i < songRows.length; i++) {
         songRows[i].addEventListener('mouseleave', function(event) {
             //selects first child element, which is the song-item-number element
+            //switch back to song number when mouse leaves song row
             this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
         });
      }
