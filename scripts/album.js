@@ -66,18 +66,34 @@
  
  };
 
+ var child = document.getElementsByClassName('album-view-title')[0];
+ var noParent = document.querySelector('html');
+
 
  var findParentByClassName = function(element, className) {
 
     var currentParent = element.parentElement;
 
-    while (currentParent.className != className) {
-        currentParent = currentParent.parentElement;
+    if (element.parentElement === null) {
+        alert("No parent found.");
     }
 
-    return currentParent;
+    if (currentParent.className === null) {
+        alert("No parent found with that class name.");
+    } else {
+
+        while (currentParent.className != className) {
+            currentParent = currentParent.parentElement;
+
+            return currentParent;
+        }
+
+    }
 
  };
+
+ findParentByClassName(child, 'banana');
+
 
 //always returns the element with the song item number class
  var getSongItem = function(element) {
