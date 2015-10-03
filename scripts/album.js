@@ -100,6 +100,29 @@
     
 };
 
+var clickHandler = function(targetElement) {
+
+    var songItem = getSongItem(targetElement);
+
+    if (currentlyPlayingSong === null) {
+        //if no song currently playing, set the pause button on the song row that was clicked 
+        //set currentlyPlayingSong to the clicked song's number
+        songItem.innerHTML = pauseButtonTemplate;
+        currentlyPlayingSong = songItem.getAttribute('data-song-number');
+    } else if (currentlyPlayingSong === songItem.getAttribute('data-song-number')) {
+        //if the playing song is clicked again/paused, revert the button back to a play button
+        songItem.innerHTML = playButtonTemplate;
+        currentlyPlayingSong = null;
+    } else if (currentlyPlayingSong !== songItem.getAttribute('data-song-number')) {
+        //if new song is clicked, set content of new song to pause button
+        var currentlyPlayingSongElement = document.querySelector('[data-song-number="' + currentlyPlayingSong + '"]');
+        currentlyPlayingSongElement.innerHTML = currentlyPlayingSongElement.getAttribute('data-song-number');
+        songItem.innerHTML = pauseButtonTemplate;
+        currentlyPlayingSong = songItem.getAttribute('data-song-number');
+    }
+
+};
+
 
 //Elements with listeners
  var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
@@ -107,7 +130,7 @@
 
  //Album button templates
  var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
- var pauseButtonTempalte = '<a class="album-song-button"><span class="ion-pause"></span></a>';
+ var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
 
  //Store the state of playing songs
  var currentlyPlayingSong = null;
@@ -118,18 +141,34 @@
 
      songListContainer.addEventListener('mouseover', function(event) {
 
-     //only target individual song rows during event delegation
-     //switch to play button template when mouse moves over song row
-         if (event.target.parentElement.className === 'album-view-song-item') {
-            event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
+        var songItem = getSongItem(event.target);
+        var songItemNumber = songItem.getAttribute('data-song-number');
+
+        if (songItemNumber !== currentlyPlayingSong) {
+         //only target individual song rows during event delegation
+         //switch to play button template when mouse moves over song row
+             if (event.target.parentElement.className === 'album-view-song-item') {
+                event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
+             }
          }
      });
 
      for (i = 0; i < songRows.length; i++) {
         songRows[i].addEventListener('mouseleave', function(event) {
-            //selects first child element, which is the song-item-number element
-            //switch back to song number when mouse leaves song row
-            this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
+            
+            //cache the song item & song number just left in a variable
+            var songItem = getSongItem(event.target);
+            var songItemNumber = songItem.getAttribute('data-song-number');
+
+            //added a conditional to check if the item the mouse is leaving is not the current song
+            //only change the content if it isn't
+            if (songItemNumber !== currentlyPlayingSong) {
+                songItem.innerHTML = songItemNumber;
+            }
+        });
+
+        songRows[i].addEventListener('click', function(event) {
+            clickHandler(event.target);
         });
      }
      
