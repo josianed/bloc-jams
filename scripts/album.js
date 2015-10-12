@@ -86,17 +86,27 @@ var createSongRow = function(songNumber, songName, songLength) {
  
  };
 
+ var trackIndex = function(album, song) {
+    return album.songs.indexOf(song);
+ };
+
  var updatePlayerBarSong = function() {
 
-    var songName = $('.song-name');
-    var artistName = $('.artist-name');
-    var artistSongMobile = $('.artist-song-mobile');
+    var songName = $('.currently-playing .song-name');
+    var artistName = $('.currently-playing .artist-name');
+    var artistSongMobile = $('.currently-playing .artist-song-mobile');
 
-    songName.html(currentSongFromAlbum.name);
-    artistName.html(currentSongFromAlbum.artist);
-    artistSongMobile.html(currentSongFromAlbum.name + " - " + currentSongFromAlbum.artist);
+    songName.text(currentSongFromAlbum.name);
+    artistName.text(currentAlbum.artist);
+    artistSongMobile.text(currentSongFromAlbum.name + " - " + currentAlbum.artist);
 
     $('.main-controls .play-pause').html(playerBarPauseButton);
+
+ };
+
+ var nextSong = function(song) {
+
+
 
  };
 
