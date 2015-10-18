@@ -55,6 +55,7 @@ var createSongRow = function(songNumber, songName, songLength) {
             songNumberCell.html(playButtonTemplate);
         }
     };
+
      
     var offHover = function(event) {
 
@@ -101,9 +102,11 @@ var createSongRow = function(songNumber, songName, songLength) {
  
  };
 
+
  var trackIndex = function(album, song) {
     return album.songs.indexOf(song);
  };
+
 
  var updatePlayerBarSong = function() {
 
@@ -118,6 +121,7 @@ var createSongRow = function(songNumber, songName, songLength) {
     $('.main-controls .play-pause').html(playerBarPauseButton);
 
  };
+
 
  var nextSong = function() {
 
@@ -162,6 +166,7 @@ var createSongRow = function(songNumber, songName, songLength) {
 
  };
 
+
  var previousSong = function() {
 
     var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
@@ -205,6 +210,7 @@ var createSongRow = function(songNumber, songName, songLength) {
 
  };
 
+
  var setSong = function(songNumber) {
 
   if (currentSoundFile) {
@@ -241,6 +247,23 @@ var createSongRow = function(songNumber, songName, songLength) {
  };
 
 
+ var togglePlayFromPlayerBar = function() {
+
+  var songNumberCell = $(this).find('.song-item-number');
+
+    if (currentSoundFile.isPaused()) {
+      songNumberCell.html(playerBarPauseButton);
+      $playPause.html(playerBarPauseButton);
+      currentSoundFile.play();
+    } else if (currentSoundFile) {
+      songNumberCell.html(playerBarPauseButton);
+      $playPause.html(playerBarPauseButton);
+      currentSoundFile.pause();
+    }
+
+ };
+
+
  //Album button templates
  var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
  var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
@@ -257,12 +280,14 @@ var createSongRow = function(songNumber, songName, songLength) {
 //next and previous buttons
  var $previousButton = $('.main-controls .previous');
  var $nextButton = $('.main-controls .next');
+ var $playPause = $('.main-controls .play-pause');
  
 $(document).ready(function() {
     
     setCurrentAlbum(albumPicasso);
     $previousButton.click(previousSong);
     $nextButton.click(nextSong);
+    $playPause.click(togglePlayFromPlayerBar);
      
  });
 
