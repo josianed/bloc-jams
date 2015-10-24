@@ -146,7 +146,7 @@ var createSongRow = function(songNumber, songName, songLength) {
          
          var seekBarFillRatio = offsetX / barWidth;
 
-         if ($seekBars.parent === $('.control-group .seek-control')) {
+         if ($(this).parent().attr('class') === $('.seek-control')) {
             seek(seekBarFillRatio * currentSoundFile.getDuration());
          } else {
             setVolume(seekBarFillRatio * 100);
@@ -165,7 +165,7 @@ var createSongRow = function(songNumber, songName, songLength) {
              var barWidth = $seekBar.width();
              var seekBarFillRatio = offsetX / barWidth;
 
-          if ($seekBars.parent === $('.control-group .seek-control')) {
+          if ($seekBar.parent().attr('class') === $('.seek-control')) {
             seek(seekBarFillRatio * currentSoundFile.getDuration());
           } else {
             setVolume(seekBarFillRatio);
